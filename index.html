@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RailConnect – Smart Railway Reservation</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <span class="logo-icon">🚆</span>
+      <div>
+        <div class="logo-title">RailConnect</div>
+        <div class="logo-sub">Smart Railway Reservation</div>
+      </div>
+    </div>
+    <nav class="header-nav">
+      <button class="nav-btn active" onclick="showPage('search')">Search Trains</button>
+      <button class="nav-btn" onclick="showPage('mybookings')">My Bookings</button>
+      <button class="nav-btn" onclick="showPage('pnr')">PNR Status</button>
+      <button class="nav-btn dsa-btn" onclick="showPage('dsa')">🧠 DSA View</button>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== TOAST ===== -->
+<div id="toast" class="toast"></div>
+
+<!-- ===== POPUP OVERLAY ===== -->
+<div id="popupOverlay" class="popup-overlay" onclick="closePopup()">
+  <div class="popup-box" onclick="event.stopPropagation()">
+    <div id="popupContent"></div>
+    <button class="btn btn-primary mt16" onclick="closePopup()">Close</button>
+  </div>
+</div>
+
+<!-- ==================== PAGE: SEARCH ==================== -->
+<div id="page-search" class="page active">
+  <div class="hero-band">
+    <div class="hero-text">Book Your Train Ticket</div>
+    <div class="hero-sub">Fast · Reliable · DSA-Powered</div>
+  </div>
+
+  <div class="container">
+    <div class="search-card">
+      <div class="search-grid">
+        <div class="form-group">
+          <label>From Station</label>
+          <select id="fromStation">
+            <option value="">-- Select Source --</option>
+          </select>
+        </div>
+        <div class="swap-btn-wrap">
+          <button class="swap-btn" onclick="swapStations()" title="Swap">⇄</button>
+        </div>
+        <div class="form-group">
+          <label>To Station</label>
+          <select id="toStation">
+            <option value="">-- Select Destination --</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Journey Date</label>
+          <input type="date" id="journeyDate"/>
+        </div>
+        <div class="form-group">
+          <label>Class</label>
+          <select id="travelClass">
+            <option value="ALL">All Classes</option>
+            <option value="SL">Sleeper (SL)</option>
+            <option value="3AC">3rd AC (3AC)</option>
+            <option value="2AC">2nd AC (2AC)</option>
+          </select>
+        </div>
+      </div>
+      <div class="search-actions">
+        <button class="btn btn-primary btn-large" onclick="searchTrains()">🔍 Search Trains</button>
+        <button class="btn btn-orange btn-large" onclick="rushBookingSimulate()">⚡ Simulate Rush Booking</button>
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div id="resultsSection" style="display:none">
+      <div class="results-header">
+        <div id="resultsTitle" class="results-title"></div>
+        <div id="sortInfo" class="sort-info">Results sorted using Binary Search</div>
+      </div>
+      <div id="trainList" class="train-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PAGE: AVAILABILITY ==================== -->
+<div id="page-availability" class="page">
+  <div class="container">
+    <button class="back-btn" onclick="showPage('search')">← Back to Search</button>
+    <div id="availabilityContent"></div>
+  </div>
+</div>
+
+<!-- ==================== PAGE: BOOKING FORM ==================== -->
+<div id="page-booking" class="page">
+  <div class="container">
+    <button class="back-btn" onclick="showPage('availability')">← Back to Availability</button>
+    <div id="bookingFormContent"></div>
+  </div>
+</div>
+
+<!-- ==================== PAGE: MY BOOKINGS ==================== -->
+<div id="page-mybookings" class="page">
+  <div class="container">
+    <div class="page-title">My Bookings
+      <span class="page-title-sub">Sorted by Date (Merge Sort)</span>
+    </div>
+    <div id="bookingsList"></div>
+  </div>
+</div>
+
+<!-- ==================== PAGE: PNR ==================== -->
+<div id="page-pnr" class="page">
+  <div class="container">
+    <div class="page-title">PNR Status Check
+      <span class="page-title-sub">Instant lookup via Hash Map</span>
+    </div>
+    <div class="pnr-card">
+      <div class="form-group">
+        <label>Enter PNR Number</label>
+        <input type="text" id="pnrInput" placeholder="e.g. PNR1001" maxlength="10" oninput="this.value=this.value.toUpperCase()"/>
+      </div>
+      <button class="btn btn-primary" onclick="checkPNR()">Check Status</button>
+    </div>
+    <div id="pnrResult"></div>
+  </div>
+</div>
+
+<!-- ==================== PAGE: DSA PANEL ==================== -->
+<div id="page-dsa" class="page">
+  <div class="container">
+    <div class="page-title">🧠 DSA Visualization Panel
+      <span class="page-title-sub">Live data structures</span>
+    </div>
+
+    <div class="dsa-grid">
+
+      <!-- Array -->
+      <div class="dsa-panel">
+        <div class="dsa-panel-header array-header">
+          <span class="dsa-icon">📦</span>
+          <div>
+            <div class="dsa-title">Train Array</div>
+            <div class="dsa-desc">Sorted array for Binary Search</div>
+          </div>
+        </div>
+        <div id="dsaArray" class="dsa-content"></div>
+      </div>
+
+      <!-- Queue -->
+      <div class="dsa-panel">
+        <div class="dsa-panel-header queue-header">
+          <span class="dsa-icon">🔄</span>
+          <div>
+            <div class="dsa-title">Booking Queue (FIFO)</div>
+            <div class="dsa-desc">Pending booking requests</div>
+          </div>
+        </div>
+        <div id="dsaQueue" class="dsa-content"></div>
+      </div>
+
+      <!-- Linked List -->
+      <div class="dsa-panel">
+        <div class="dsa-panel-header ll-header">
+          <span class="dsa-icon">🔗</span>
+          <div>
+            <div class="dsa-title">Waiting List (Linked List)</div>
+            <div class="dsa-desc">True linked list with next pointers</div>
+          </div>
+        </div>
+        <div id="dsaLinkedList" class="dsa-content"></div>
+      </div>
+
+      <!-- Hash Map -->
+      <div class="dsa-panel">
+        <div class="dsa-panel-header hash-header">
+          <span class="dsa-icon">🗂️</span>
+          <div>
+            <div class="dsa-title">PNR Hash Map</div>
+            <div class="dsa-desc">O(1) PNR lookup</div>
+          </div>
+        </div>
+        <div id="dsaHashMap" class="dsa-content"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

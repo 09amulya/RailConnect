@@ -1,0 +1,724 @@
+/* ===================================================
+   RailConnect – Smart Railway Reservation System
+   CSS – Light IRCTC-style, elder-friendly
+   =================================================== */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blue:        #1a6fb5;
+  --blue-dark:   #144f85;
+  --blue-light:  #e8f1fb;
+  --orange:      #e87722;
+  --orange-light:#fff3e8;
+  --green:       #1a8a3c;
+  --green-light: #e6f6eb;
+  --red:         #c0392b;
+  --red-light:   #fdecea;
+  --yellow:      #e6a817;
+  --yellow-light:#fffbe6;
+  --gray-bg:     #f4f6f9;
+  --gray-border: #dde3ed;
+  --text-dark:   #1a2233;
+  --text-mid:    #4a5568;
+  --text-light:  #7a8599;
+  --white:       #ffffff;
+  --shadow:      0 2px 12px rgba(26,111,181,0.10);
+  --shadow-md:   0 4px 24px rgba(26,111,181,0.15);
+  --radius:      10px;
+  --radius-sm:   6px;
+}
+
+body {
+  font-family: 'Noto Sans', sans-serif;
+  background: var(--gray-bg);
+  color: var(--text-dark);
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ===== HEADER ===== */
+header {
+  background: var(--blue);
+  color: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  gap: 16px;
+}
+.logo { display: flex; align-items: center; gap: 10px; }
+.logo-icon { font-size: 28px; }
+.logo-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.logo-sub { font-size: 11px; opacity: 0.82; letter-spacing: 0.3px; }
+.header-nav { display: flex; gap: 6px; flex-wrap: wrap; }
+.nav-btn {
+  background: rgba(255,255,255,0.12);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.22);
+  padding: 7px 15px;
+  border-radius: 6px;
+  font-size: 13.5px;
+  cursor: pointer;
+  font-family: 'Noto Sans', sans-serif;
+  transition: background 0.18s, border-color 0.18s;
+}
+.nav-btn:hover, .nav-btn.active {
+  background: rgba(255,255,255,0.24);
+  border-color: rgba(255,255,255,0.5);
+}
+.dsa-btn {
+  background: var(--orange) !important;
+  border-color: #c96318 !important;
+}
+.dsa-btn:hover { background: #cf6a1a !important; }
+
+/* ===== CONTAINER ===== */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px 20px 48px;
+}
+
+/* ===== PAGES ===== */
+.page { display: none; }
+.page.active { display: block; }
+
+/* ===== HERO ===== */
+.hero-band {
+  background: linear-gradient(90deg, var(--blue-dark) 0%, var(--blue) 100%);
+  color: white;
+  text-align: center;
+  padding: 28px 20px 22px;
+}
+.hero-text {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+.hero-sub { font-size: 14px; opacity: 0.85; margin-top: 4px; }
+
+/* ===== SEARCH CARD ===== */
+.search-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow-md);
+  margin-top: -10px;
+  border: 1px solid var(--gray-border);
+}
+.search-grid {
+  display: grid;
+  grid-template-columns: 1fr 36px 1fr 1fr 1fr;
+  gap: 14px;
+  align-items: end;
+}
+@media(max-width: 768px) {
+  .search-grid { grid-template-columns: 1fr; }
+  .swap-btn-wrap { display: none; }
+  .header-nav { display: none; }
+}
+.form-group { display: flex; flex-direction: column; gap: 5px; }
+.form-group label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-mid);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+.form-group input,
+.form-group select {
+  padding: 10px 12px;
+  border: 1.5px solid var(--gray-border);
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  font-family: 'Noto Sans', sans-serif;
+  color: var(--text-dark);
+  background: white;
+  transition: border-color 0.18s;
+}
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(26,111,181,0.10);
+}
+.swap-btn-wrap { display: flex; align-items: center; justify-content: center; }
+.swap-btn {
+  background: var(--blue-light);
+  border: 1.5px solid var(--blue);
+  color: var(--blue);
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  font-size: 17px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s;
+}
+.swap-btn:hover { background: var(--blue); color: white; }
+
+.search-actions { margin-top: 20px; display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* ===== BUTTONS ===== */
+.btn {
+  padding: 10px 22px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+}
+.btn:hover { opacity: 0.9; }
+.btn:active { transform: scale(0.98); }
+.btn-primary { background: var(--blue); color: white; }
+.btn-orange  { background: var(--orange); color: white; }
+.btn-green   { background: var(--green); color: white; }
+.btn-red     { background: var(--red); color: white; }
+.btn-outline { background: white; color: var(--blue); border: 1.5px solid var(--blue); }
+.btn-large   { padding: 12px 28px; font-size: 16px; }
+.mt16 { margin-top: 16px; }
+
+/* ===== RESULTS ===== */
+.results-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin: 24px 0 14px;
+  flex-wrap: wrap; gap: 8px;
+}
+.results-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--blue-dark);
+}
+.sort-info {
+  font-size: 12px;
+  color: var(--text-light);
+  background: var(--blue-light);
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(26,111,181,0.15);
+}
+.train-list { display: flex; flex-direction: column; gap: 14px; }
+
+/* ===== TRAIN CARD ===== */
+.train-card {
+  background: white;
+  border: 1px solid var(--gray-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.18s;
+}
+.train-card:hover { box-shadow: var(--shadow-md); }
+.train-card-header {
+  background: var(--blue-light);
+  padding: 12px 18px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid var(--gray-border);
+  flex-wrap: wrap; gap: 8px;
+}
+.train-name-num { display: flex; align-items: center; gap: 10px; }
+.train-number {
+  background: var(--blue);
+  color: white;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+.train-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--blue-dark);
+}
+.running-days {
+  font-size: 12px;
+  color: var(--text-mid);
+  background: white;
+  padding: 3px 10px;
+  border-radius: 20px;
+  border: 1px solid var(--gray-border);
+}
+.train-card-body {
+  padding: 14px 18px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto;
+  align-items: center;
+  gap: 14px;
+}
+@media(max-width: 600px) {
+  .train-card-body { grid-template-columns: 1fr 1fr; }
+}
+.station-info { }
+.time-big {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+.station-name { font-size: 13px; color: var(--text-mid); margin-top: 1px; }
+.duration-box { text-align: center; }
+.duration-label { font-size: 11px; color: var(--text-light); }
+.duration-value {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--blue);
+}
+.duration-arrow {
+  font-size: 20px;
+  color: var(--blue-light);
+  display: block;
+  margin: 2px 0;
+}
+.train-card-footer {
+  padding: 12px 18px;
+  border-top: 1px solid var(--gray-border);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 10px;
+}
+.class-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+.class-badge {
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1.5px solid;
+}
+.class-SL  { color: #1a6fb5; border-color: #1a6fb5; background: #e8f1fb; }
+.class-3AC { color: #1a8a3c; border-color: #1a8a3c; background: #e6f6eb; }
+.class-2AC { color: #e87722; border-color: #e87722; background: #fff3e8; }
+.class-1AC { color: #8b008b; border-color: #8b008b; background: #f5e6f5; }
+
+/* ===== AVAILABILITY PAGE ===== */
+.avail-train-info {
+  background: white;
+  border: 1px solid var(--gray-border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+}
+.avail-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--blue-dark);
+  margin-bottom: 14px;
+}
+.avail-date-tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+.date-tab {
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--gray-border);
+  background: white;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: 'Noto Sans', sans-serif;
+  transition: all 0.15s;
+}
+.date-tab.active { background: var(--blue); color: white; border-color: var(--blue); }
+.date-tab:hover:not(.active) { border-color: var(--blue); color: var(--blue); }
+.avail-classes-grid { display: flex; flex-direction: column; gap: 12px; }
+.avail-class-row {
+  background: white;
+  border: 1px solid var(--gray-border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px;
+  box-shadow: var(--shadow);
+}
+.avail-class-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  min-width: 60px;
+}
+.avail-fare { color: var(--text-mid); font-size: 14px; }
+.avail-fare strong { color: var(--text-dark); font-size: 16px; }
+.avail-seats-info { text-align: center; }
+.seats-count {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+}
+.seats-label { font-size: 12px; color: var(--text-light); }
+.status-badge {
+  display: inline-block;
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.status-available { background: var(--green-light); color: var(--green); }
+.status-limited    { background: var(--yellow-light); color: var(--yellow); }
+.status-waitlist   { background: var(--red-light); color: var(--red); }
+.prob-badge {
+  font-size: 12.5px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  border: 1px solid;
+}
+.prob-high   { background: var(--green-light); color: var(--green); border-color: #a8d5b5; }
+.prob-medium { background: var(--yellow-light); color: var(--yellow); border-color: #f0d48a; }
+.prob-low    { background: var(--red-light); color: var(--red); border-color: #f5a9a3; }
+
+/* ===== BOOKING FORM ===== */
+.booking-card {
+  background: white;
+  border: 1px solid var(--gray-border);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow-md);
+  max-width: 700px;
+}
+.booking-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--blue-dark);
+  margin-bottom: 18px;
+  border-bottom: 2px solid var(--blue-light);
+  padding-bottom: 10px;
+}
+.passenger-row {
+  background: var(--gray-bg);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  margin-bottom: 10px;
+}
+.passenger-row-title {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-mid);
+  margin-bottom: 8px;
+}
+.passenger-form-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 10px;
+}
+@media(max-width:600px) { .passenger-form-grid { grid-template-columns: 1fr; } }
+.booking-summary-mini {
+  background: var(--blue-light);
+  border: 1px solid rgba(26,111,181,0.2);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  margin-bottom: 18px;
+  font-size: 14px;
+  color: var(--blue-dark);
+}
+
+/* ===== MY BOOKINGS ===== */
+.page-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--blue-dark);
+  margin-bottom: 6px;
+}
+.page-title-sub {
+  display: inline-block;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-light);
+  background: var(--blue-light);
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-left: 8px;
+  border: 1px solid rgba(26,111,181,0.15);
+}
+.booking-item {
+  background: white;
+  border: 1px solid var(--gray-border);
+  border-radius: var(--radius);
+  margin-bottom: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.booking-item-header {
+  padding: 12px 18px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid var(--gray-border);
+  flex-wrap: wrap; gap: 8px;
+}
+.booking-pnr {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--blue-dark);
+}
+.booking-status-confirmed {
+  background: var(--green-light);
+  color: var(--green);
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.booking-status-waiting {
+  background: var(--yellow-light);
+  color: var(--yellow);
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.booking-item-body {
+  padding: 14px 18px;
+  font-size: 14px;
+  color: var(--text-mid);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
+  gap: 10px;
+}
+.booking-field { }
+.booking-field-label { font-size: 11px; text-transform: uppercase; color: var(--text-light); font-weight: 600; letter-spacing: 0.4px; }
+.booking-field-val { font-size: 14px; color: var(--text-dark); font-weight: 600; }
+.booking-item-footer {
+  padding: 10px 18px;
+  background: var(--gray-bg);
+  border-top: 1px solid var(--gray-border);
+  display: flex; justify-content: flex-end; gap: 10px;
+}
+
+/* ===== PNR PAGE ===== */
+.pnr-card {
+  background: white;
+  border: 1px solid var(--gray-border);
+  border-radius: var(--radius);
+  padding: 24px;
+  max-width: 450px;
+  box-shadow: var(--shadow);
+  margin-bottom: 20px;
+}
+.pnr-result-card {
+  background: white;
+  border: 1px solid var(--gray-border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  max-width: 560px;
+  box-shadow: var(--shadow-md);
+}
+.pnr-result-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--green);
+  margin-bottom: 14px;
+}
+
+/* ===== DSA PANEL ===== */
+.dsa-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+@media(max-width:700px) { .dsa-grid { grid-template-columns: 1fr; } }
+.dsa-panel {
+  background: white;
+  border: 1px solid var(--gray-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.dsa-panel-header {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--gray-border);
+}
+.array-header  { background: #e8f1fb; }
+.queue-header  { background: #fff3e8; }
+.ll-header     { background: #e6f6eb; }
+.hash-header   { background: #f5e6f5; }
+.dsa-icon { font-size: 22px; }
+.dsa-title { font-family: 'Rajdhani', sans-serif; font-size: 16px; font-weight: 700; }
+.dsa-desc  { font-size: 11.5px; color: var(--text-light); }
+.dsa-content {
+  padding: 14px;
+  max-height: 320px;
+  overflow-y: auto;
+  font-size: 13px;
+}
+.dsa-node {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--blue-light);
+  border: 1.5px solid var(--blue);
+  border-radius: 4px;
+  padding: 4px 10px;
+  margin: 3px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--blue-dark);
+}
+.dsa-node.queue-node  { background: #fff3e8; border-color: var(--orange); color: #a05010; }
+.dsa-node.ll-node     { background: #e6f6eb; border-color: var(--green); color: var(--green); }
+.dsa-node.hash-node   { background: #f5e6f5; border-color: #8b008b; color: #8b008b; }
+.dsa-arrow { color: var(--text-light); margin: 0 2px; font-size: 14px; }
+.dsa-empty  { color: var(--text-light); font-style: italic; font-size: 13px; }
+.dsa-hash-row {
+  display: flex; align-items: center; gap: 8px;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--gray-border);
+  font-size: 12.5px;
+  flex-wrap: wrap;
+}
+.hash-key   { font-weight: 700; color: #8b008b; font-family: monospace; }
+.hash-arrow { color: var(--text-light); }
+.hash-val   { color: var(--text-dark); }
+.dsa-ll-row { display: flex; align-items: center; flex-wrap: wrap; }
+
+/* ===== POPUP ===== */
+.popup-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 500;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.popup-overlay.show { display: flex; }
+.popup-box {
+  background: white;
+  border-radius: var(--radius);
+  padding: 30px;
+  max-width: 440px;
+  width: 100%;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.25);
+  animation: popIn 0.2s ease;
+}
+@keyframes popIn {
+  from { transform: scale(0.93); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+.confirm-icon { font-size: 48px; text-align: center; margin-bottom: 10px; }
+.confirm-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  color: var(--green);
+  margin-bottom: 16px;
+}
+.confirm-wl-title { color: var(--yellow); }
+.confirm-table { width: 100%; font-size: 14px; }
+.confirm-table tr td:first-child {
+  color: var(--text-light);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  padding: 4px 0;
+  white-space: nowrap;
+  padding-right: 12px;
+}
+.confirm-table tr td:last-child {
+  font-weight: 600;
+  color: var(--text-dark);
+  padding: 4px 0;
+}
+
+/* ===== BACK BTN ===== */
+.back-btn {
+  background: none;
+  border: none;
+  color: var(--blue);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 18px;
+  font-family: 'Noto Sans', sans-serif;
+}
+.back-btn:hover { text-decoration: underline; }
+
+/* ===== TOAST ===== */
+.toast {
+  display: none;
+  position: fixed;
+  bottom: 28px; left: 50%;
+  transform: translateX(-50%);
+  background: var(--text-dark);
+  color: white;
+  padding: 10px 24px;
+  border-radius: 30px;
+  font-size: 14px;
+  z-index: 600;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+}
+.toast.show { display: block; animation: fadeInUp 0.2s ease; }
+@keyframes fadeInUp {
+  from { opacity:0; transform: translateX(-50%) translateY(10px); }
+  to   { opacity:1; transform: translateX(-50%) translateY(0); }
+}
+
+/* ===== MISC ===== */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-light);
+}
+.empty-state-icon { font-size: 42px; margin-bottom: 10px; }
+.empty-state-text { font-size: 16px; }
+.divider { height: 1px; background: var(--gray-border); margin: 14px 0; }
+.tag-green { color: var(--green); font-weight: 700; }
+.tag-red   { color: var(--red); font-weight: 700; }
+.tag-yellow { color: var(--yellow); font-weight: 700; }
+
+/* Add passenger btn */
+#addPassengerBtn {
+  background: none;
+  color: var(--blue);
+  border: 1.5px dashed var(--blue);
+  border-radius: var(--radius-sm);
+  padding: 8px 18px;
+  font-size: 14px;
+  font-family: 'Noto Sans', sans-serif;
+  cursor: pointer;
+  margin-bottom: 16px;
+  width: 100%;
+  text-align: center;
+}
+#addPassengerBtn:hover { background: var(--blue-light); }
+
+/* Seat map placeholder */
+.seat-row-hint {
+  display: flex; gap: 14px; flex-wrap: wrap;
+  font-size: 12.5px; color: var(--text-mid); margin-top: 8px;
+}
+.seat-hint-item { display: flex; align-items: center; gap: 5px; }
+.seat-dot { width: 12px; height: 12px; border-radius: 2px; }
+
+.avail-section-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--blue-dark);
+  margin-bottom: 12px;
+}

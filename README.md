@@ -107,13 +107,6 @@ Railway-DSA-Project/
 
 ---
 
-## ▶️ How to Run
-
-1. Download or clone the repository
-2. Open `index.html` in your browser
-3. Start searching and booking trains
-
----
 
 ## 🎯 Project Objective
 
@@ -135,15 +128,9 @@ The goal of this project is to:
 
 ---
 
-## 🎤 Viva Explanation (Short)
-
-This project demonstrates how Data Structures like Queue, Linked List, and Hash Map can be used to efficiently manage a railway reservation system. It focuses on optimizing operations like booking, searching, and waiting list management using DSA principles.
-
----
-
 ## 👨‍💻 Author
 
-* Name: *Your Name*
+* Name: *Amulya Pratap Singh*
 * Course: B.Tech (CSE)
 * Subject: Data Structures and Algorithms
 

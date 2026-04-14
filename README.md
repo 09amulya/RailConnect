@@ -1,5 +1,4 @@
-# 🚆 Smart Railway Reservation System (DSA-Based Prototype)
-
+# 🚆 Smart Railway Reservation System 
 A **Data Structures and Algorithms (DSA)** based Railway Reservation System prototype that simulates real-world train booking logic similar to IRCTC.
 
 This project demonstrates how core DSA concepts can be applied to solve real-world problems like ticket booking, waiting list management, and fast data retrieval.
